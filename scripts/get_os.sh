@@ -1,4 +1,9 @@
 #!/bin/bash
+# Usage:
+#    source get_os.sh
+#    OS=$(getOS)
+#    echo $OS
+
 function getOS {
     local unameOut="$(uname -s)"
     case "${unameOut}" in
@@ -10,7 +15,3 @@ function getOS {
     esac
     echo "$machine"
 }
-
-OS=$(getOS)
-echo $OS
-
