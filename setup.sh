@@ -58,6 +58,12 @@ else
     echo "Option --update not used"
 fi
 
+# Note: Won't be able to run this on macOS yet.  I had to just go through the
+# different sections manually to apply the required updates and fix any issues
+# that arised.  In particular, I had to:
+# * update bash version to > 4.0 (default is 3.x)
+# * use .bash_profile, instead of .bashrc
+
 # Get path to current script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -70,6 +76,9 @@ if [ "$LINKS" = "true" ]; then
     ln -sf "$DIR"/bash/inputrc ~/.inputrc
     ln -sf "$DIR"/bash/my_grep ~/.my_grep
     sudo ln -sf "$DIR"/bash/ta /etc/bash_completion.d/ta
+    if [[ $OS = "Mac" ]]; then
+        ln -sf "$DIR"/bash/bash_profile.mac ~/.bash_profile
+    fi
 
     ln -sf "$DIR"/git/gitignore ~/.gitignore
     ln -sf "$DIR"/git/gitconfig ~/.gitconfig

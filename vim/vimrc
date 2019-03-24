@@ -155,13 +155,10 @@ Plugin 'scrooloose/nerdTree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'bling/vim-airline'
 Plugin 'majutsushi/tagbar'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'vim-syntastic/syntastic'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'rdnetto/YCM-Generator'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
@@ -173,7 +170,6 @@ Plugin 'henrik/vim-indexed-search'
 Plugin 'kana/vim-operator-user'
 Plugin 'haya14busa/vim-operator-flashy'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -335,11 +331,6 @@ cabbrev make <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'make!' : 'make')<CR>
 " -----------------------------------------------------------------------------
 " FUNCTION KEYS
 " -----------------------------------------------------------------------------
-
-" " YouCompleteMe mappings
-" nnoremap <F2> :YcmCompleter GoToDeclaration<CR>
-" nnoremap <F3> :YcmCompleter GoTo<CR>
-" nnoremap <F4> :YcmCompleter GetDoc<CR>
 
 " map toggling of quickfix view to F5
 map <silent> <F5> :copen<CR>
@@ -515,32 +506,6 @@ au Syntax * RainbowParenthesesLoadBraces
 " Enable vim-airline
 let g:airline#extensions#tabline#enabled = 1
 
-
-" -----------------------------------------------------------------------------
-" YOU COMPLETE ME
-" -----------------------------------------------------------------------------
-
-" When this option is set to 1, YCM will auto-close the preview window after
-" the user leaves insert mode.
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
-" " -----------------------------------------------------------------------------
-" " SYNTASTIC
-" " -----------------------------------------------------------------------------
-
-" " The default settings recommended by vim-syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-
-" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-" nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
 " -----------------------------------------------------------------------------
 " VIM OPERATOR FLASHY
 " -----------------------------------------------------------------------------
@@ -551,19 +516,6 @@ nmap Y <Plug>(operator-flashy)$
 
 " set flash time to 300ms
 let g:operator#flashy#flash_time = 300
-
-" -----------------------------------------------------------------------------
-" ULTISNIPS
-" -----------------------------------------------------------------------------
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-h>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " -----------------------------------------------------------------------------
 " VIM-INDEX-SEARCH

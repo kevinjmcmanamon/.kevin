@@ -1,3 +1,6 @@
+source ~/.kevin/scripts/get_os.sh
+OS=$(getOS)
+
 # define separate ~/.my_grep script so that grep inside vim can use it as well
 alias grep='~/.my_grep'
 # needed to add this separately as tab complete with 'make' was not working
@@ -13,11 +16,17 @@ alias ag='ag --ignore-dir target'
 # command). Therefore I remove all occurrences of 'rm' from the history file by
 # default.  remove all lines starting with 'rm' (including starting
 # whitespace):
-sed -i '/^ *\brm\b/d' $HISTFILE
-# remove all lines starting with 'sudo rm' (including starting whitespace):
-sed -i '/^ *\bsudo rm\b/d' $HISTFILE
-# remove all lines containing '/bin/rm'
-sed -i '\#/bin/rm#d' $HISTFILE
+if [[ $OS = "Linux" ]]; then
+    sed -i '/^ *\brm\b/d' $HISTFILE
+    # remove all lines starting with 'sudo rm' (including starting whitespace):
+    sed -i '/^ *\bsudo rm\b/d' $HISTFILE
+    # remove all lines containing '/bin/rm'
+    sed -i '\#/bin/rm#d' $HISTFILE
+elif [[ $OS = "Mac" ]]; then
+    sed -i "" '/^ *\brm\b/d' $HISTFILE
+    sed -i "" '/^ *\bsudo rm\b/d' $HISTFILE
+    sed -i "" '\#/bin/rm#d' $HISTFILE
+fi
 
 # Furthermore, update the HISTIGNORE env variable to ignore all rm commands:
 export HISTIGNORE="$HISTIGNORE:&:rm *:sudo rm *:/bin/rm *"
@@ -93,8 +102,15 @@ fi
 # -----------------------------------------------------------------------------
 
 # set aliases for git (with useful tab-completion, even when using aliases)
-source /usr/share/bash-completion/bash_completion
-_completion_loader git
+if [[ $OS = "Linux" ]]; then
+    source /usr/share/bash-completion/bash_completion
+    _completion_loader git
+elif [[ $OS = "Mac" ]]; then
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
+fi
+
 alias g='git'
 __git_complete g _git
 alias gs='git status'
@@ -129,7 +145,7 @@ __git_complete gpap _git_pull
 # Call git pull on the ~/.kevin directory to ensure I'm always up to date:
 # Only done if there is only one bash shell running (so that it doesn't run
 # every time I open a new shell):
-if [ $(pgrep -c bash) -le 2 ]; then
+if [ $(pgrep bash | wc -l) -le 1 ]; then
   echo "Updating ~/.kevin repository..."
   CWD=$(pwd)
   cd ~/.kevin >/dev/null && git pull --prune https://github.com/kevinjmcmanamon/.kevin && cd ~ >/dev/null
@@ -298,7 +314,7 @@ alias cd_dev='cd /cygdrive/c/dev'
 function cd_up() {
   case $1 in
     *[!0-9]*)                                          # if no a number
-      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
+      cd $( pwd | sed -E "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
       ;;                                               # if not found - not cd
     *)
       cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
