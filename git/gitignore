@@ -1,0 +1,11 @@
+*.swp
+*.swo
+_install*
+_build*
+_logs*
+compile_commands.json
+build
+install
+devel
+artifacts
+.vscode

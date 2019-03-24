@@ -1,0 +1,365 @@
+# define separate ~/.my_grep script so that grep inside vim can use it as well
+alias grep='~/.my_grep'
+# needed to add this separately as tab complete with 'make' was not working
+# otherwise:
+alias grepn='~/.my_grep -n'
+
+# set alias so that the silver searcher ignores all target directories:
+alias ag='ag --ignore-dir target'
+
+# I don't want any rm commands going into my bash history (the reason I've
+# previous deleted stuff by mistake was by using the arrow keys to use a
+# previous command, and hitting enter before realising that I was on an 'rm'
+# command). Therefore I remove all occurrences of 'rm' from the history file by
+# default.  remove all lines starting with 'rm' (including starting
+# whitespace):
+sed -i '/^ *\brm\b/d' $HISTFILE
+# remove all lines starting with 'sudo rm' (including starting whitespace):
+sed -i '/^ *\bsudo rm\b/d' $HISTFILE
+# remove all lines containing '/bin/rm'
+sed -i '\#/bin/rm#d' $HISTFILE
+
+# Furthermore, update the HISTIGNORE env variable to ignore all rm commands:
+export HISTIGNORE="$HISTIGNORE:&:rm *:sudo rm *:/bin/rm *"
+
+# create alias for rm so that the call to rm automatically used -i. Also
+# double-checks if force option is used.
+function safe_rm() {
+
+  # Double check with user if force option '-f' is used.
+  if [[ $@ =~ -[a-zA-Z]*f ]]; then
+
+    # Also need to add patch for ROS here.  The ROS setup.sh script (called by
+    # .bashrc) tries to delete some temp ROS file with 'rm -f', so check for
+    # that here:
+    if [[ $@ != *"-f /tmp/setup.sh"* ]]; then
+
+      read -p "You are trying to remove something using force '-f'. Are you sure? (y/N) " -r
+      echo # to add a new line
+      if [[ ! $REPLY =~ ^[Yy]$ ]] # If anything other than Y or y is entered
+      then
+        echo "Cancelling call to rm."
+        return
+      fi
+    fi
+  fi
+
+  /bin/rm -i $@
+}
+
+alias rm='safe_rm'
+
+# Also, don't store anything to history that starts with a space. This can be
+# used for any other commands that I don't want to put into history - just
+# start the command with an empty space.
+export HISTCONTROL=$HISTCONTROL:ignorespace
+
+# Useful function for grepping through MS Word documents:
+function grepdoc() {
+
+  if [ $# -eq 0 ]; then
+    echo "Usage: $0 [string] [path]";
+    echo "";
+    echo "[string] = String to search";
+    echo "[path] = Path to files to search";
+    echo "";
+    return 1;
+  fi
+
+  # First search through all .doc files found:
+  find $2 -name "*.doc" -exec sh -c "catdoc '{}' | grep --color=auto -iH --label='{}' $1" \;
+
+  # Then search through all .docx files found:
+  find $2 -name "*.docx" -exec sh -c "docx2txt < '{}' | grep --color=auto -iH --label='{}' $1" \;
+}
+
+# set an alias to easily open files using the default application from the terminal
+alias o='xdg-open'
+
+# -----------------------------------------------------------------------------
+# TMUX ALIASES
+# -----------------------------------------------------------------------------
+alias tls='command tmux ls'
+alias td='command tmux detach'
+alias tmux='command tmux -2 new-session -A -s `basename $PWD`'
+alias ta='command tmux attach -t $1'
+# Allow tab completion with tmux attach alias:
+if [ -f /etc/bash_completion.d/ta ]; then
+   . /etc/bash_completion.d/ta
+fi
+
+# -----------------------------------------------------------------------------
+# GIT ALIASES
+# -----------------------------------------------------------------------------
+
+# set aliases for git (with useful tab-completion, even when using aliases)
+source /usr/share/bash-completion/bash_completion
+_completion_loader git
+alias g='git'
+__git_complete g _git
+alias gs='git status'
+__git_complete gs _git_status
+alias ga='git add'
+__git_complete ga _git_add
+alias gb='git branch'
+__git_complete gb _git_branch
+alias gc='git commit'
+__git_complete gc _git_commit
+alias gd='git diff'
+__git_complete gd _git_diff
+alias gvd='git difftool'
+__git_complete gvd _git_diff
+alias go='git checkout'
+__git_complete go _git_checkout
+alias gl='git lg'
+__git_complete gl _git_log
+alias gla='git lg --all'
+__git_complete gl _git_log
+alias gls='git lg --all --simplify-by-decoration'
+__git_complete gl _git_log
+alias gp='git pull'
+__git_complete gp _git_pull
+alias gpa='git pull --all'
+__git_complete gpa _git_pull
+alias gpp='git pull --prune'
+__git_complete gpp _git_pull
+alias gpap='git pull --all --prune'
+__git_complete gpap _git_pull
+
+# Call git pull on the ~/.kevin directory to ensure I'm always up to date:
+# Only done if there is only one bash shell running (so that it doesn't run
+# every time I open a new shell):
+if [ $(pgrep -c bash) -le 2 ]; then
+  echo "Updating ~/.kevin repository..."
+  CWD=$(pwd)
+  cd ~/.kevin >/dev/null && git pull --prune https://github.com/kevinjmcmanamon/.kevin && cd ~ >/dev/null
+
+  # clone or pull bash-git-prompt:
+  echo "Updating ~/.bash-git-prompt repository..."
+  git -C ~/.bash-git-prompt pull || \
+    git clone https://github.com/magicmonty/bash-git-prompt.git ~/.bash-git-prompt --depth=1
+  cd ${CWD}
+fi
+
+# Set PROMPT_COMMAND so that all commands, from all terminals, are saved into
+# ~/.bash_history automatically.  This means I can have access to all commands
+# I have run from all terminals.
+export HISTCONTROL=$HISTCONTROL:ignoredups:erasedups  # no duplicate entries
+export HISTSIZE=100000                   # big big history
+export HISTFILESIZE=100000               # big big history
+shopt -s histappend                      # append to history, don't overwrite it
+
+# Save and reload the history after each command finishes
+# NOTE: needs to be set before sourcing of bash-git-prompt config (which also
+# alters the value of PROMPT_COMMAND)
+# DISABLED AS IT IS NOT REALLY NICE TO WORK WITH - PRESSING UP ARROW DOESN'T
+# TAKE YOU TO LAST COMMAND RUN IN THAT TERMINAL:
+#
+# export PROMPT_COMMAND="history -a; history -c; history -r"
+
+# Set PS1 to make prompt look like cygwin
+RED="$(tput setaf 1)"
+GREEN="$(tput setaf 2)"
+YELLOW="$(tput setaf 3)"
+RESET="$(tput sgr0)"
+# Using bash-git-prompt to set PS1 prompt, rather than setting PS1 directly:
+# PS1='${RED}\t ${GREEN}\u@\h: ${YELLOW}\w ${RESET}\n\$ '
+
+# source script to set nice prompt for git (need to remove my cd alias which
+# apparently was causing issues):
+unalias cd 2>/dev/null
+# GIT_PROMPT_ONLY_IN_REPO=1
+GIT_PROMPT_FETCH_REMOTE_STATUS=0   # uncomment to avoid fetching remote status
+# GIT_PROMPT_SHOW_UPSTREAM=1 # uncomment to show upstream tracking branch
+# GIT_PROMPT_SHOW_UNTRACKED_FILES=all # can be no, normal or all; determines counting of untracked files
+# GIT_PROMPT_SHOW_CHANGED_FILES_COUNT=0 # uncomment to avoid printing the number of changed files
+GIT_PROMPT_START='_LAST_COMMAND_INDICATOR_ ${RED}\t ${GREEN}\u@\h: ${YELLOW}\w ${RESET}'
+GIT_PROMPT_END='\n\$ '
+. ~/.bash-git-prompt/gitprompt.sh
+
+# Set up commands for efficient directory navigation using directory stacks:
+
+# display directory stack in a nice numbered list:
+alias dirs='dirs -v'
+
+# function to remove duplicate directories from the stack:
+rm_duplicate_dirs(){
+    declare -a new=() copy=("${DIRSTACK[@]:1}")
+    declare -A seen
+    local v i
+    seen[$PWD]=1
+    for v in "${copy[@]}"
+    do if [ -z "${seen[$v]}" ]
+       then new+=("$v")
+            seen[$v]=1
+       fi
+    done
+    dirs -c
+    for ((i=${#new[@]}-1; i>=0; i--))
+    do      builtin pushd -n "${new[i]}" >/dev/null
+    done
+}
+
+pushd_custom()
+{
+   # check if dir is different to current dir (if not, do nothing):
+   if ! [[ "$1" -ef $PWD ]]; then
+      pushd "$1" > /dev/null || return 1
+      # remove duplicate dirs from directory stack:
+      rm_duplicate_dirs
+   fi
+}
+
+cd_custom()
+{
+   # set regular expression to check for a number:
+   re='^[0-9]+$'
+
+   # If no argument given, return to home dir (like default cd behaviour)
+   if [ $# -eq 0 ] ; then
+      pushd_custom "${HOME}" || return 1
+   # If argument is a number:
+   elif [[ $1 =~ $re ]] ; then
+      # If argument is a number, but also a directory, then cd into it:
+      if [ -d "$1" ]; then
+         pushd_custom "$1" || return 1
+      # otherwise, cd to the directory on the stack by its number:
+      else
+         # add current dir to stack (otherwise, current dir is lost from the stack):
+         pushd . > /dev/null || return 1
+         # increment arg by one to take into account dir just added
+         index=$(($1+1))
+         # formulate command to jump to directory on stack
+         cmd="~$index"
+         # execute command:
+         eval builtin cd "$cmd"
+         # remove duplicate dirs from directory stack:
+         rm_duplicate_dirs
+      fi
+   # if "-" passed, just call pushd to stop new dirs being added to the stack
+   elif [[ $1 = "-" ]] ; then
+      pushd > /dev/null || return 1
+   # argument given, not a number, not a dash:
+   else
+      pushd_custom "$1" || return 1
+   fi
+
+   # print current directory stack
+   echo "Directory stack:"
+   dirs
+   echo ""
+
+   # print contents of current directory:
+   ls -lh
+}
+
+pushd_builtin()
+{
+  pushd > /dev/null
+  dirs
+}
+
+popd_builtin()
+{
+  popd > /dev/null
+  dirs
+}
+
+clear_dirs()
+{
+  dirs -c
+  dirs
+}
+
+# override cd to use pushd instead:
+alias cd='cd_custom'
+# Go to previous dir in the stack
+alias cd.='popd_builtin'
+# Flip between last two dirs:
+alias cd-='pushd_builtin'
+# Clear directory stack:
+alias cdo='clear_dirs'
+
+# Set aliases for common directories that I want to cd in to:
+alias cd_ws='cd ~/workspace'
+alias cd_home='cd /cygdrive/c/Users/kmcmanamon'
+alias cd_desktop='cd /cygdrive/c/Users/kmcmanamon/Desktop'
+alias cd_dev='cd /cygdrive/c/dev'
+
+# nice shortcut to make navigating up directories more efficient:
+
+# To cd up to n dirs: cd.. n
+#   e.g. cd.. 5
+#   will go up 5 directories
+# Or cd to a dir on the current path using its name:
+#   e.g. if pwd = /one/two/three/four
+#   then 'cd.. two' will move to dir 'two'
+#   furthermore, 'cd.. on' is all that is needed to move to dir 'one'
+function cd_up() {
+  case $1 in
+    *[!0-9]*)                                          # if no a number
+      cd $( pwd | sed -r "s|(.*/$1[^/]*/).*|\1|" )     # search dir_name in current path, if found - cd to it
+      ;;                                               # if not found - not cd
+    *)
+      cd $(printf "%0.0s../" $(seq 1 $1));             # cd ../../../../  (N dirs)
+    ;;
+  esac
+}
+
+alias 'cd..'='cd_up'                                # can not name function 'cd..'
+
+# provide alias to give cat functionality but with colour syntax highlighting
+
+# create bash function to also display the file line numbers:
+pyg() {
+    pygmentize $1 | perl -e 'print ++$i." $_" for <>'
+}
+
+# create alias 'dog'
+alias dog='pyg'
+
+# alias for quick list of files in current dif
+alias l='ls -lh'
+alias la='ls -lha'
+
+# alias to source .bashrc file
+alias brc='source ~/.bashrc'
+
+# alias to lock screen from terminal
+alias lock='gnome-screensaver-command -l'
+
+# disable XON/XOFF so that ctrl-S works for forward bash history searching
+stty -ixon
+
+# Useful alias for FDECO project to run ROS commands:
+alias d='docker run --rm --net fdeco -e ROS_MASTER_URI=http://master:11311 fdeco-solar'
+
+# Alias to remove all dangling docker images
+alias docker-rm-dangling-images='docker rmi $(docker images -q -f dangling=true)'
+
+# Alias to remove all dangling volumes
+alias docker-rm-dangling-volumes='docker volume rm $(docker volume ls -f dangling=true -q)'
+
+# Alias to remove all docker containers (except my dropbox container)
+alias docker-rm-all-containers='docker rm $(docker ps -a | grep -v dropbox | grep -v CONTAINER | awk '\''{print $1}'\'')'
+
+# Alias to stop all docker containers (except my dropbox container)
+alias docker-stop-all-containers='docker stop $(docker ps -a | grep -v dropbox | grep -v CONTAINER | awk '\''{print $1}'\'')'
+
+# Alias to launch my dropbox running in a docker container (for running dropbox
+# at work)
+alias docker-dropbox='docker run -d --restart=always --name=dropbox \
+  -v ~/Dropbox:/dbox/Dropbox/ \
+  -e DBOX_UID=`id -u $USER` \
+  -e DBOX_GID=`id -g $USER` \
+  janeczku/dropbox'
+
+# Alias to get dropbox status
+alias docker-dropbox-status='docker exec -it dropbox watch -n0.1 dropbox status'
+
+# Alias to do full clean
+alias docker-clean='docker-stop-all-containers; docker-rm-all-containers; docker-rm-dangling-images; docker-rm-dangling-volumes'
+
+# set default editor to vim:
+export VISUAL=vim
+export EDITOR="$VISUAL"
