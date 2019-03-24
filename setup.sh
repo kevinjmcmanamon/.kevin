@@ -77,6 +77,9 @@ if [ "$LINKS" = "true" ]; then
     ln -sf "$DIR"/vim/vimrc ~/.vimrc
     ln -sf "$DIR"/vim ~/.vim
 
+    ln -sf "$DIR"/vscode/settings.json $HOME/.config/Code/User/settings.json
+    ln -sf "$DIR"/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
+
     # create link to dropbox vimwiki directory from default vimwiki location:
     ln -sf ~/Dropbox/vimwiki ~/vimwiki
 fi

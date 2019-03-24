@@ -1,0 +1,145 @@
+{
+  "workbench.colorTheme": "Visual Studio Dark",
+  // start bash, not the mintty, or you'll get a new window
+  "terminal.integrated.shell.windows": "C:\\Users\\kmcmanamon\\.babun\\cygwin\\bin\\bash.exe",
+  // Use this to keep bash from doing a 'cd ${HOME}'
+  "terminal.integrated.env.windows": {
+    "CHERE_INVOKING": "1"
+  },
+  // Make it a login shell
+  "terminal.integrated.shellArgs.windows": [
+    "-l"
+  ],
+  "editor.lineNumbers": "relative",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "all",
+  "files.trimTrailingWhitespace": true,
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  "vim.insertModeKeyBindings": [
+    {
+      "before": [
+        "j",
+        "k"
+      ],
+      "after": [
+        "<Esc>"
+      ]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": [
+        "u"
+      ],
+      "after": [],
+      "commands": [
+        {
+          "command": "undo"
+        }
+      ]
+    },
+    {
+      "before": [
+        "<C-r>"
+      ],
+      "after": [],
+      "commands": [
+        {
+          "command": "redo"
+        }
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "d"
+      ],
+      "after": [
+        "0",
+        "D"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "o"
+      ],
+      "after": [
+        "o",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "O"
+      ],
+      "after": [
+        "O",
+        "<Esc>"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "p"
+      ],
+      "after": [
+        "v",
+        "e",
+        "p",
+        "b",
+        "y",
+        "e"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "f"
+      ],
+      "after": [
+        "<leader>",
+        "<leader>",
+        "<leader>",
+        "b",
+        "d",
+        "w"
+      ]
+    },
+    {
+      "before": [
+        "<leader>",
+        "x"
+      ],
+      "commands": [
+        "workbench.action.closeActiveEditor"
+      ]
+    },
+    {
+      "before": [
+        "Y"
+      ],
+      "after": [
+        "y",
+        "$"
+      ]
+    }
+  ],
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "breadcrumbs.enabled": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "python.jediEnabled": false,
+  "python.unitTest.unittestEnabled": false,
+  "python.unitTest.pyTestEnabled": true,
+  "python.unitTest.nosetestsEnabled": false,
+}

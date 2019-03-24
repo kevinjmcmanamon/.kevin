@@ -1,0 +1,14 @@
+code --install-extension [createInstance] extensionManagementService depends on downloadService which is NOT registered.
+code --install-extension 2gua.rainbow-brackets
+code --install-extension burkeholland.simple-react-snippets
+code --install-extension dsznajder.es7-react-js-snippets
+code --install-extension EditorConfig.EditorConfig
+code --install-extension esbenp.prettier-vscode
+code --install-extension formulahendry.code-runner
+code --install-extension formulahendry.vscode-mysql
+code --install-extension vscodevim.vim
+code --install-extension ybaumes.highlight-trailing-white-spaces
+
+also:
+Python
+sftp
