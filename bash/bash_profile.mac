@@ -8,4 +8,5 @@ source ~/.bash_aliases
 
 # export PATH="/usr/local/opt/libxml2/bin:$PATH"
 alias dev='ssh -p620 -A kjm@dev.administratehq.com'
+export TEST_DATABASE_URI=mysql://root:insecure@127.0.0.1:3306/gql_api_tests
 
