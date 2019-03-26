@@ -12,3 +12,4 @@ code --install-extension ybaumes.highlight-trailing-white-spaces
 also:
 Python
 sftp
+git lense
