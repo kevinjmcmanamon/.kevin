@@ -7,9 +7,7 @@
     "CHERE_INVOKING": "1"
   },
   // Make it a login shell
-  "terminal.integrated.shellArgs.windows": [
-    "-l"
-  ],
+  "terminal.integrated.shellArgs.windows": ["-l"],
   "editor.lineNumbers": "relative",
   "editor.formatOnSave": true,
   "editor.renderWhitespace": "all",
@@ -22,20 +20,13 @@
   "vim.leader": "<space>",
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "j",
-        "k"
-      ],
-      "after": [
-        "<Esc>"
-      ]
+      "before": ["j", "k"],
+      "after": ["<Esc>"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "u"
-      ],
+      "before": ["u"],
       "after": [],
       "commands": [
         {
@@ -44,9 +35,7 @@
       ]
     },
     {
-      "before": [
-        "<C-r>"
-      ],
+      "before": ["<C-r>"],
       "after": [],
       "commands": [
         {
@@ -55,80 +44,32 @@
       ]
     },
     {
-      "before": [
-        "<leader>",
-        "d"
-      ],
-      "after": [
-        "0",
-        "D"
-      ]
+      "before": ["<leader>", "d"],
+      "after": ["0", "D"]
     },
     {
-      "before": [
-        "<leader>",
-        "o"
-      ],
-      "after": [
-        "o",
-        "<Esc>"
-      ]
+      "before": ["<leader>", "o"],
+      "after": ["o", "<Esc>"]
     },
     {
-      "before": [
-        "<leader>",
-        "O"
-      ],
-      "after": [
-        "O",
-        "<Esc>"
-      ]
+      "before": ["<leader>", "O"],
+      "after": ["O", "<Esc>"]
     },
     {
-      "before": [
-        "<leader>",
-        "p"
-      ],
-      "after": [
-        "v",
-        "e",
-        "p",
-        "b",
-        "y",
-        "e"
-      ]
+      "before": ["<leader>", "p"],
+      "after": ["v", "e", "p", "b", "y", "e"]
     },
     {
-      "before": [
-        "<leader>",
-        "f"
-      ],
-      "after": [
-        "<leader>",
-        "<leader>",
-        "<leader>",
-        "b",
-        "d",
-        "w"
-      ]
+      "before": ["<leader>", "f"],
+      "after": ["<leader>", "<leader>", "<leader>", "b", "d", "w"]
     },
     {
-      "before": [
-        "<leader>",
-        "x"
-      ],
-      "commands": [
-        "workbench.action.closeActiveEditor"
-      ]
+      "before": ["<leader>", "x"],
+      "commands": ["workbench.action.closeActiveEditor"]
     },
     {
-      "before": [
-        "Y"
-      ],
-      "after": [
-        "y",
-        "$"
-      ]
+      "before": ["Y"],
+      "after": ["y", "$"]
     }
   ],
   "emmet.includeLanguages": {
@@ -139,7 +80,9 @@
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.jediEnabled": false,
-  "python.unitTest.unittestEnabled": false,
-  "python.unitTest.pyTestEnabled": true,
+  "python.unitTest.unittestEnabled": true,
+  "python.unitTest.pyTestEnabled": false,
   "python.unitTest.nosetestsEnabled": false,
+  "python.unitTest.autoTestDiscoverOnSaveEnabled": false,
+  "workbench.editor.showTabs": true
 }
