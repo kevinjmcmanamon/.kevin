@@ -28,6 +28,7 @@ rsync -azvh \
     --exclude="alchemy_config.py*" \
     --exclude="xtext.txt" \
     --exclude=".*" \
+    --exclude="requirements.txt" \
     --filter=":- ~/workspace/neoteric/.gitignore" \
     ~/workspace/neoteric/ \
     kjm@dev.administratehq.com:~/neoteric \
