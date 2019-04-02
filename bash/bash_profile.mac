@@ -10,3 +10,9 @@ source ~/.bash_aliases
 alias dev='ssh -p620 -A kjm@dev.administratehq.com'
 export TEST_DATABASE_URI=mysql://root:insecure@127.0.0.1:3306/gql_api_tests
 
+# Start fswatch and rsync to synchronise local to dev box
+if ! pgrep -x "fswatch" > /dev/null; then
+    echo "Starting fswatch and rsync for dev box synchronisation..."
+    ~/.kevin/scripts/run_dev_sync_watch.sh
+fi
+
