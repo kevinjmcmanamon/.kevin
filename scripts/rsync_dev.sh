@@ -9,6 +9,7 @@ rsync -azvh \
     --progress \
     --delete \
     --include=".cvsignore" \
+    --include=".git/" \
     --exclude="*.swp" \
     --filter=":- ~/workspace/Administrate/.gitignore" \
     ~/workspace/Administrate/ \
@@ -21,6 +22,7 @@ rsync -azvh \
     -e "ssh -p 620" \
     --progress \
     --delete \
+    --include=".git/" \
     --exclude=".vscode" \
     --exclude=".env" \
     --exclude="*.swp" \
