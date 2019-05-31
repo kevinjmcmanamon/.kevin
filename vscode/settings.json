@@ -13,6 +13,7 @@
   "editor.renderWhitespace": "all",
   "files.trimTrailingWhitespace": true,
   "vim.easymotion": true,
+  "vim.easymotionKeys": "asdfjkl;",
   "vim.incsearch": true,
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
@@ -80,9 +81,15 @@
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "python.jediEnabled": false,
-  "python.unitTest.unittestEnabled": true,
-  "python.unitTest.pyTestEnabled": false,
-  "python.unitTest.nosetestsEnabled": false,
-  "python.unitTest.autoTestDiscoverOnSaveEnabled": false,
-  "workbench.editor.showTabs": true
+  "python.testing.unittestEnabled": true,
+  "python.testing.pyTestEnabled": false,
+  "python.testing.nosetestsEnabled": false,
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "workbench.editor.showTabs": true,
+  "sshfs.configs": [
+    {
+      "name": "devbox_neoteric"
+    }
+  ],
+  "window.zoomLevel": 1,
 }
