@@ -145,7 +145,7 @@ __git_complete gpap _git_pull
 # Call git pull on the ~/.kevin directory to ensure I'm always up to date:
 # Only done if there is only one bash shell running (so that it doesn't run
 # every time I open a new shell):
-if [ $(pgrep bash | wc -l) -le 1 ]; then
+if [ $(pgrep bash | wc -l) -le 2 ]; then
   echo "Updating ~/.kevin repository..."
   CWD=$(pwd)
   cd ~/.kevin >/dev/null && git pull --prune https://github.com/kevinjmcmanamon/.kevin && cd ~ >/dev/null
