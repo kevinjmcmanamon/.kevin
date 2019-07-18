@@ -1,3 +1,4 @@
 set surround
 source ~/.vimrc_common
 
+nmap <leader>f :action KJumpAction.Word0<cr>
