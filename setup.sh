@@ -86,6 +86,7 @@ if [ "$LINKS" = "true" ]; then
     ln -sf "$DIR"/tmux/tmux.conf ~/.tmux.conf
 
     ln -sf "$DIR"/vim/vimrc ~/.vimrc
+    ln -sf "$DIR"/vim/vimrc_common ~/.vimrc_common
     ln -sf "$DIR"/vim ~/.vim
 
     ln -sf "$DIR"/jetbrains/ideavimrc ~/.ideavimrc

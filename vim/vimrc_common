@@ -1,0 +1,107 @@
+" remap Y to copy from cursor to end of the line (similar to 'C' and 'D')
+nnoremap <silent> <S-y> y$
+
+" remap Escape key to jk to make it far quicker to return to normal mode
+imap jk <Esc>
+
+" remap jk for command line mode also (note: mapping to <Esc> in
+" command line mode will submit the command-line as if pressing Return rather.
+" To create a mapping to act like Esc in command-line mode, you must map to
+" <C-c> instead.
+cmap jk <C-c>
+
+" show current command at bottom of screen:
+set showcmd
+
+" Ignore case when searching for patterns
+set ignorecase
+
+" Show line at specified column (e.g. column 80)
+set colorcolumn=80
+
+" highlight the current line
+set cursorline
+
+" Highlight all search pattern matches
+set hlsearch
+
+" Show line numbers by default
+set number
+
+" Use relative line numbering
+set rnu
+
+" -----------------------------------------------------------------------------
+" LEADER KEY USES
+" -----------------------------------------------------------------------------
+
+" set leader key to be space:
+let mapleader = " "
+
+" Add shortcut "<leader>-d" to delete the contents of the line, without
+" deleting the line itself
+:map <leader>d 0<S-d>
+
+" nice way to close the current buffer
+nnoremap <leader>x :bp\|bd #<CR>
+
+" Set shortcut to close all other buffers except the current one.
+" If any buffers have local changes that have not been saved, they will be
+" left open.
+nnoremap <leader><S-x> :%bd <bar> :e# <bar> :bNext <bar> :bdelete<cr>
+
+" Add shortcut "<leader>o" and "<leader>O" to insert new lines below and above
+" without leaving normal mode
+nnoremap <leader>o o<ESC>
+nnoremap <leader><s-o> <s-o><ESC>
+
+" Add shortcut "<leader>-p" to change the current word with the current yanked text
+:map <leader>p "_cw<C-r>"<ESC>
+
+" map leader-h and leader-l to move to previous older and newer quickfix views.
+autocmd BufReadPost quickfix nnoremap <buffer> <leader>h :col<CR>
+autocmd BufReadPost quickfix nnoremap <buffer> <leader>l :cnew<CR>
+
+" Added shortcuts to quickly size vim windows
+nnoremap <leader>wj <C-W>5+
+nnoremap <leader>wk <C-W>5-
+nnoremap <leader>wh <C-W>5<
+nnoremap <leader>wl <C-W>5>
+
+" set shortcut to search for the word currently under the cursor in the
+" current working directory:
+nnoremap <leader>s :execute 'grep! <cword>' fnameescape(getcwd())<CR>
+
+" add shortcut to reload vimrc without restarting vim:
+nnoremap <leader><s-v> :so ~/.vimrc<CR>
+
+" add shortcut to quickly open vimrc:
+nnoremap <leader>v :e ~/.vimrc<CR>
+
+" Easymotion shortcut
+map <Leader> <Plug>(easymotion-prefix)
+nmap <leader>f <Plug>(easymotion-bd-w)
+
+" Set so that <leader>c sets 'no ignore case' to perform case sensitive
+" searches.  <leader>c would typically be called before using *, #, /, ?, or
+" :%s commands to carry out case sensitive searching.
+nnoremap <leader>c :set noic<CR>
+
+" use leader key to navigate up and down across _displayed_ lines (when lines
+" are wrapped), rather than jumping to the next actual line:
+nmap <leader>j gj
+nmap <leader>k gk
+
+" use leader key to enable and disable line wrapping:
+nnoremap <leader>r :set wrap!<CR>
+
+" use leader key to toggle line numbers:
+nnoremap <leader>n :set rnu!<CR> :set number!<CR>
+
+" remap keys to easily switch between buffers (used to use leader key, but
+" didn't allow holding down leader key at same time)
+nnoremap <silent> <C-h> :bp<CR>
+nnoremap <silent> <C-l> :bn<CR>
+
+
+
