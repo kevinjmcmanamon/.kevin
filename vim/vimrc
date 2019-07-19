@@ -222,6 +222,11 @@ set spell spelllang=en_gb
 set list
 set listchars=tab:>-
 
+" remap keys to easily switch between buffers (used to use leader key, but
+" didn't allow holding down leader key at same time)
+nnoremap <silent> <C-h> :bp<CR>
+nnoremap <silent> <C-l> :bn<CR>
+
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
 " equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
@@ -322,6 +327,13 @@ set pastetoggle=<F10>
 " bind \ (backward slash) to grep shortcut
 command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 nnoremap \ :Ag<SPACE>
+
+" -----------------------------------------------------------------------------
+" EasyMotion
+" -----------------------------------------------------------------------------
+" Easymotion shortcut
+map <Leader> <Plug>(easymotion-prefix)
+nmap <leader>f <Plug>(easymotion-bd-w)
 
 " -----------------------------------------------------------------------------
 " CTRL-P

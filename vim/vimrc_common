@@ -40,7 +40,7 @@ let mapleader = " "
 
 " Add shortcut "<leader>-d" to delete the contents of the line, without
 " deleting the line itself
-:map <leader>d 0<S-d>
+nnoremap <leader>d 0<S-d>
 
 " nice way to close the current buffer
 nnoremap <leader>x :bp\|bd #<CR>
@@ -56,7 +56,7 @@ nnoremap <leader>o o<ESC>
 nnoremap <leader><s-o> <s-o><ESC>
 
 " Add shortcut "<leader>-p" to change the current word with the current yanked text
-:map <leader>p "_cw<C-r>"<ESC>
+nnoremap <leader>p "_cw<C-r>"<ESC>
 
 " map leader-h and leader-l to move to previous older and newer quickfix views.
 autocmd BufReadPost quickfix nnoremap <buffer> <leader>h :col<CR>
@@ -78,10 +78,6 @@ nnoremap <leader><s-v> :so ~/.vimrc<CR>
 " add shortcut to quickly open vimrc:
 nnoremap <leader>v :e ~/.vimrc<CR>
 
-" Easymotion shortcut
-map <Leader> <Plug>(easymotion-prefix)
-nmap <leader>f <Plug>(easymotion-bd-w)
-
 " Set so that <leader>c sets 'no ignore case' to perform case sensitive
 " searches.  <leader>c would typically be called before using *, #, /, ?, or
 " :%s commands to carry out case sensitive searching.
@@ -97,11 +93,4 @@ nnoremap <leader>r :set wrap!<CR>
 
 " use leader key to toggle line numbers:
 nnoremap <leader>n :set rnu!<CR> :set number!<CR>
-
-" remap keys to easily switch between buffers (used to use leader key, but
-" didn't allow holding down leader key at same time)
-nnoremap <silent> <C-h> :bp<CR>
-nnoremap <silent> <C-l> :bn<CR>
-
-
 

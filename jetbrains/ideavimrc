@@ -2,3 +2,7 @@ set surround
 source ~/.vimrc_common
 
 nmap <leader>f :action KJumpAction.Word0<cr>
+nmap <leader>x :action CloseActiveTab<cr>
+nmap <C-h> :action VimMotionPreviousTab<cr>
+nmap <C-l> :action VimMotionNextTab<cr>
+
