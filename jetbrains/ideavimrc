@@ -1,4 +1,6 @@
 set surround
+set mutiple-cursors
+set commentary
 source ~/.vimrc_common
 
 nmap <leader>f :action KJumpAction.Word0<cr>
