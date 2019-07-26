@@ -1,5 +1,5 @@
 set surround
-set mutiple-cursors
+set multiple-cursors
 set commentary
 source ~/.vimrc_common
 
