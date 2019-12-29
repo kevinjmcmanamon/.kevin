@@ -92,9 +92,11 @@ if [ "$LINKS" = "true" ]; then
     ln -sf "$DIR"/jetbrains/ideavimrc ~/.ideavimrc
 
     if [[ $OS = "Linux" ]]; then
+        mkdir -p $HOME/.config/Code/User
         ln -sf "$DIR"/vscode/settings.json $HOME/.config/Code/User/settings.json
         ln -sf "$DIR"/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
     elif [[ $OS = "Mac" ]]; then
+        mkdir -p $HOME/Library/Application Support/Code/User
         ln -sf "$DIR"/vscode/settings.json "$HOME/Library/Application Support/Code/User/settings.json"
         ln -sf "$DIR"/vscode/keybindings.json "$HOME/Library/Application Support/Code/User/keybindings.json"
     fi
