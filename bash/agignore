@@ -1,0 +1,5 @@
+target/
+*.min.js
+main.js
+main.umd.js
+main.umd.min.js

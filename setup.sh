@@ -72,6 +72,7 @@ if [ "$LINKS" = "true" ]; then
 
     # Create sym links to config files:
     ln -sf "$DIR"/bash/bash_aliases ~/.bash_aliases
+    ln -sf "$DIR"/bash/agignore ~/.agignore
     ln -sf "$DIR"/bash/dircolors ~/.dircolors
     ln -sf "$DIR"/bash/inputrc ~/.inputrc
     ln -sf "$DIR"/bash/my_grep ~/.my_grep
