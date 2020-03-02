@@ -8,6 +8,7 @@
 #    email = kevinjmcmanamon@gmail.com
 
 [alias]
+    pr = "!open \"http://github.com/$(git remote -v|sed -e '/^origin/!d' -e '/(push)$/!d' -e 's|^.*github\\.com[:/]\\([^. ]*\\).*$|\\1|')/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
     lg = !"git lg1"
     lg1 = !"git lg1-specific"
     lg2 = !"git lg2-specific"
