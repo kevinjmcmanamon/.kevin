@@ -8,5 +8,4 @@ build
 install
 devel
 artifacts
-.vscode
 .env
