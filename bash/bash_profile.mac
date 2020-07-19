@@ -4,6 +4,10 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
+if [ -f `brew --prefix`/etc/bash_completion.d/git-completion.bash ]; then
+. `brew --prefix`/etc/bash_completion.d/git-completion.bash
+fi
+
 source ~/.bash_aliases
 
 # export PATH="/usr/local/opt/libxml2/bin:$PATH"
@@ -12,11 +16,3 @@ alias encode='python ~/.kevin/scripts/base64helper.py e'
 alias decode='python ~/.kevin/scripts/base64helper.py d'
 export TEST_DATABASE_URI=mysql://root:insecure@127.0.0.1:3306/gql_api_tests
 export DEV_HOST=kjm-core.dev.administratehq.com
-
-# Start fswatch and rsync to synchronise local to dev box
-# if ! pgrep -x "fswatch" > /dev/null; then
-#     echo "Starting fswatch and rsync for dev box synchronisation..."
-#     ssh-add
-#     ~/.kevin/scripts/run_dev_sync_watch.sh
-# fi
-
