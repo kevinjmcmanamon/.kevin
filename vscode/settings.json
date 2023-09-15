@@ -91,7 +91,8 @@
       "name": "devbox_neoteric"
     }
   ],
-  "window.zoomLevel": 1,
   "importMagic.maxColumns": 120,
   "importMagic.multiline": "backslash",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "window.zoomLevel": 1,
 }
