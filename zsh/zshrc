@@ -146,3 +146,25 @@ bindkey -s "^[Ok" "+"
 bindkey -s "^[Om" "-"
 bindkey -s "^[Oj" "*"
 bindkey -s "^[Oo" "/"
+
+function clone_all_graphyte_repos() {
+    cd ~/workspace
+    gh repo list graphyteai --limit 1000 --no-archived | while read -r repo _; do
+        gh repo clone "$repo" "$repo"
+    done
+}
+
+function update_all_graphyte_repos() {
+    cd ~/workspace
+    gh repo list graphyteai --limit 1000 --no-archived | while read -r repo _; do
+        if [ ! -d "$repo" ]; then
+            echo "$repo does not exist."
+            gh repo clone "$repo" "$repo"
+        else
+            echo "$repo does exist. Updating..."
+            cd "$repo"
+            git pull --all --prune
+            cd ~/workspace
+        fi
+    done
+}
