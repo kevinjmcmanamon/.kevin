@@ -1,11 +1,16 @@
+[commit]
+        gpgsign = true
+
+[user]
+        email = kevin.mcmanamon@n-able.com
+        name = Kevin McManamon
+
+[url "ssh://git@github.com"]
+        insteadOf = https://github.com
+
 [core]
     excludesfile = ~/.gitignore
     editor = vim
-
-[user]
-    name = Kevin McManamon
-    email = 7547865+kevinjmcmanamon@users.noreply.github.com
-#    email = kevinjmcmanamon@gmail.com
 
 [alias]
     pr = "!open \"http://github.com/$(git remote -v|sed -e '/^origin/!d' -e '/(push)$/!d' -e 's|^.*github\\.com[:/]\\([^. ]*\\).*$|\\1|')/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
@@ -26,5 +31,6 @@
 
 [difftool]
   prompt = false
+
 [pull]
 	rebase = false
