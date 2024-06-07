@@ -5,7 +5,7 @@ source ~/.vimrc_common
 
 nmap <leader>f :action KJumpAction.Word0<cr>
 nmap <leader>x :action CloseActiveTab<cr>
-nmap <C-h> :action VimMotionPreviousTab<cr>
-nmap <C-l> :action VimMotionNextTab<cr>
+nmap <C-l> <Action>(NextTab)
+nmap <C-h> <Action>(PreviousTab)
 nmap <C-p> :action SearchEverywhere<cr>
 
