@@ -11,6 +11,7 @@
 [core]
     excludesfile = ~/.gitignore
     editor = vim
+	whitespace = cr-at-eol
 
 [alias]
     pr = "!open \"http://github.com/$(git remote -v|sed -e '/^origin/!d' -e '/(push)$/!d' -e 's|^.*github\\.com[:/]\\([^. ]*\\).*$|\\1|')/pull/new/$(git rev-parse --abbrev-ref HEAD)\""
