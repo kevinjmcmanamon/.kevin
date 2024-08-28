@@ -85,7 +85,7 @@
   "python.testing.pyTestEnabled": false,
   "python.testing.nosetestsEnabled": false,
   "python.testing.autoTestDiscoverOnSaveEnabled": false,
-  "workbench.editor.showTabs": true,
+  "workbench.editor.showTabs": "multiple",
   "sshfs.configs": [
     {
       "name": "devbox_neoteric"
@@ -95,4 +95,5 @@
   "importMagic.multiline": "backslash",
   "terminal.integrated.defaultProfile.osx": "zsh",
   "window.zoomLevel": 1,
+  "search.followSymlinks": false,
 }
