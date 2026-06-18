@@ -1,9 +1,10 @@
 [commit]
-        gpgsign = true
+	gpgsign = true
 
 [user]
         email = kevin.mcmanamon@n-able.com
         name = Kevin McManamon
+	signingkey = BDF201A3CB008920
 
 [url "ssh://git@github.com"]
         insteadOf = https://github.com

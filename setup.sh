@@ -76,9 +76,10 @@ if [ "$LINKS" = "true" ]; then
     ln -sf "$DIR"/bash/dircolors ~/.dircolors
     ln -sf "$DIR"/bash/inputrc ~/.inputrc
     ln -sf "$DIR"/bash/my_grep ~/.my_grep
-    sudo ln -sf "$DIR"/bash/ta /etc/bash_completion.d/ta
+#    sudo ln -sf "$DIR"/bash/ta /etc/bash_completion.d/ta
     if [[ $OS = "Mac" ]]; then
         ln -sf "$DIR"/bash/bash_profile.mac ~/.bash_profile
+        ln -sf "$DIR"/zsh/zshrc ~/.zshrc
     fi
 
     ln -sf "$DIR"/git/gitignore ~/.gitignore
