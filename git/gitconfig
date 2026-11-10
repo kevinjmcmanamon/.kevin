@@ -1,9 +1,9 @@
 [commit]
-	gpgsign = true
+	gpgsign = false
 
 [user]
-        email = kevin.mcmanamon@n-able.com
-        name = Kevin McManamon
+	email = kevin.mcmanamon@buildcircle.co.uk
+	name = Kevin McManamon
 	signingkey = BDF201A3CB008920
 
 [url "ssh://git@github.com"]
@@ -41,3 +41,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[init]
+	defaultBranch = main
